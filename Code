@@ -1,0 +1,31 @@
+import numpy as np
+from datascience import *
+import matplotlib
+%matplotlib inline
+import matplotlib.pyplot as plt
+plt.style.use('fivethirtyeight')
+import warnings
+warnings.simplefilter('ignore', FutureWarning)
+from matplotlib import patches
+from ipywidgets import interact, interactive, fixed
+import ipywidgets as widgets
+
+
+def correlation(tbl, col1, col2):
+    r = np.mean(standard_units(tbl.column(col1)) * standard_units(tbl.column(col2)))
+    return r
+ 
+def correlation(tbl, col1, col2):
+    r = np.mean(standard_units(tbl.column(col1)) * standard_units(tbl.column(col2)))
+    return r
+
+def regression_parameters(tbl, lbl_x, lbl_y):
+    x_mean = np.mean(tbl.column(lbl_x)) 
+    y_mean = np.mean(tbl.column(lbl_y))
+    x_sd = np.std(tbl.column(lbl_x))
+    y_sd = np.std(tbl.column(lbl_y))
+    r = correlation(tbl,lbl_x,lbl_y) 
+    slope = r * (y_sd / x_sd)
+    intercept = y_mean - (slope * x_mean)
+    return make_array(slope, intercept)
+    
